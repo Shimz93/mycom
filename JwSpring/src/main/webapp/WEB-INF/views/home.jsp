@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -46,12 +45,12 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">재우 홈</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
+              <li><a href="<%=ctx %>/list">board</a></li>
               <li><a href="#">Contact</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -76,25 +75,14 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-   
-	<a href="<%=ctx%>/write">글쓰기</a>
-	<table border=1, cellspace=1, cellpadding=1 width=800 align=center>
-		<tr>
-		<td>글번호</td>
-		<td>제목</td>
-		<td>조회수</td>
-		<td>게시일ㅇ</td>
-		</tr>
-		
-		<c:forEach var="dto" items= "${ list}" >
-		<tr>
-		<td>${dto.bId}</td>
-		<td>${dto.bTitle}</td>
-		<td>${dto.bHit}</td>
-		<td>${dto.bDate}</td>
-		</tr>
-		</c:forEach>
-	</table>
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+        </p>
+      </div>
+
     </div> <!-- /container -->
 
 

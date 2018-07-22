@@ -18,7 +18,7 @@ public class LoginController {
 		model.addAttribute("request",request);
 		Command command = new LoginCommand();
 		command.execute(model);
-		return "board";
+		return "home";
 	}
 	
 }
