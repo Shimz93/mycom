@@ -127,4 +127,93 @@ public class IDao {
 			}
 		}
 	}
+		public void modify(int bId,String bName, String bTitle, String bContent) {
+			Connection conn=null;
+			PreparedStatement pstmt=null;
+			int write=0;
+			try {
+				conn = dataSource.getConnection();
+				pstmt= conn.prepareStatement("update MVC_BOARD set bName=?, bTitle=?, bContent=? where bId=?");
+				pstmt.setString(1, bName);
+				pstmt.setString(2, bTitle);
+				pstmt.setString(3, bContent);
+				pstmt.setInt(4, bId);
+				write=pstmt.executeUpdate();
+				
+				if (write!=0) {
+					System.out.println("쿼리실행_게시글정보수정 완료");
+				}else {System.out.println("게시글수정실패");}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					pstmt.close();
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+	}
+	
+	public boardDTO contentView(int inpbId) {
+		Connection conn =null;
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		boardDTO dto= null;
+		try {
+			conn = dataSource.getConnection();
+			pstmt =conn.prepareStatement("select * from mvc_board where bId=?");
+			pstmt.setInt(1, inpbId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				int bId = rs.getInt("bId");
+				String bName = rs.getString("bName");
+				String bTitle= rs.getString("bTitle");
+				String bContent= rs.getString("bContent");
+				Timestamp bDate = rs.getTimestamp("bDate");
+				int bHit = rs.getInt("bHit");
+				int bGroup = rs.getInt("bGroup");
+				int bStep = rs.getInt("bStep");
+				int bIndent = rs.getInt("bIndent");
+				dto = new boardDTO(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+				System.out.println(dto);
+			}
+			
+		} catch (SQLException e) {
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
+	
+	public void delete(int id) {
+		Connection conn=null;
+		PreparedStatement pstmt =null;
+		
+		try {
+			conn = dataSource.getConnection();
+			System.out.println(id);
+			pstmt =conn.prepareStatement("delete from mvc_board where bId=?");
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

@@ -23,6 +23,12 @@ public class boardDTO {
 		this.bStep=bStep;
 		this.bIndent=bIndent;
 	}
+	public boardDTO(int bId,String bName,String bTitle,String bContent) {
+		this.bId=bId;
+		this.bName=bName;
+		this.bTitle=bTitle;
+		this.bContent=bContent;
+	}
 	
 	public int getbId() {
 		return bId;
