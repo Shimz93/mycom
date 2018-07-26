@@ -76,27 +76,28 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-   
-	<a href="<%=ctx%>/write">글쓰기</a>
-	<table border=1, cellspace=1, cellpadding=1 width=800 align=center>
+  
+	<form action="<%=ctx%>/replyOk" method="post">
+	<input type="hidden" name="oribId" value= "${oriDto }" >
+	<table border=1, cellspace=1, cellpadding=1 align=center>
 		<tr>
-		<td>글번호</td>
+		<td>작성자</td>
+		<td><input type="text" name="bName" ></td>
+		</tr>
+		<tr>
 		<td>제목</td>
-		<td>조회수</td>
-		<td>게시일ㅇ</td>
+		<td><input type="text" name="bTitle" ></td>
 		</tr>
-		
-		<c:forEach var="dto" items= "${ list}" >
 		<tr>
-		<td>${dto.bId}</td>
-		<td><a href="<%=ctx%>/contentView?bId=${dto.bId}">
-		<c:forEach begin="1" end="${dto.bIndent }">-</c:forEach>
-		${dto.bTitle}</td>
-		<td>${dto.bHit}</td>
-		<td>${dto.bDate}</td>
+		<td colspan="2">
+		<textarea name="bContent" cols="30" rows="10"></textarea>
+		</td>
 		</tr>
-		</c:forEach>
+		<tr>
+		<td><input type="submit" value="답글등록"></td>
+		</tr>
 	</table>
+	</form>
     </div> <!-- /container -->
 
 

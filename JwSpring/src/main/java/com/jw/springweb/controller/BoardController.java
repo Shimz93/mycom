@@ -12,6 +12,7 @@ import com.jw.springweb.command.Command;
 import com.jw.springweb.command.ContentViewCommand;
 import com.jw.springweb.command.DeleteCommand;
 import com.jw.springweb.command.ListCommand;
+import com.jw.springweb.command.ReplyCommand;
 import com.jw.springweb.command.WriteCommand;
 import com.jw.springweb.command.modifyCommand;
 import com.jw.springweb.dto.boardDTO;
@@ -30,10 +31,27 @@ public class BoardController {
 	public String write(Model model) {
 		return "write";
 	}
+	@RequestMapping("/reply")
+	public String reply(Model model, HttpServletRequest request) {
+		int originbId = Integer.parseInt(request.getParameter("bId"));
+//		boardDTO dto = new boardDTO(originbId);
+		
+//		model.addAttribute("oriDto", dto);
+		model.addAttribute("oriDto", originbId);
+		return "reply";
+	}
 	
 	@RequestMapping(value="/writeOk", method=RequestMethod.POST)
 	public String writeOk(Model model, HttpServletRequest request) {
 		Command command = new WriteCommand();
+		model.addAttribute("request", request);
+		command.execute(model);
+		return "redirect:list";
+	}
+
+	@RequestMapping(value="/replyOk", method=RequestMethod.POST)
+	public String replyOk(Model model, HttpServletRequest request) {
+		Command command = new ReplyCommand();
 		model.addAttribute("request", request);
 		command.execute(model);
 		return "redirect:list";

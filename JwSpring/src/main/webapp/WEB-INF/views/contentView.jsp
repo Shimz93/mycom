@@ -94,7 +94,7 @@
 		</tr>
 		<tr>
 		<td><input type="submit" value="수정"></td>
-		<td><input type="button" value="목록" onclick="location.href='<%=ctx%>/list'" ></td>
+		<td><input type="button" value="목록" onclick="location.href='<%=ctx%>/list'" ><input type="button" value="답글" onclick="location.href='<%=ctx%>/reply?bId=${dto.bId }'" ></td>
 		
 		</tr>
 	</table>

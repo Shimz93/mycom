@@ -94,8 +94,7 @@
 		</tr>
 		<tr>
 		<td><input type="submit" value="수정완료"></td>
-		<td><input type="button" value="목록" onclick="location.href='<%=ctx%>/list'" ></td>
-		<td><input type="button" value="삭제" onclick="location.href='<%=ctx%>/delete?bId=${ dto.bId}'" ></td>
+		<td><input type="button" value="목록" onclick="location.href='<%=ctx%>/list'" ><input type="button" value="삭제" onclick="location.href='<%=ctx%>/delete?bId=${ dto.bId}'" ></td>
 		
 		</tr>
 	</table>

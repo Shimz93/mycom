@@ -89,8 +89,7 @@
 		</tr>
 		<tr>
 		<td colspan="2">
-		<textarea name="bContent" cols="30" rows="10">
-		</textarea>
+		<textarea name="bContent" cols="30" rows="10"></textarea>
 		</td>
 		</tr>
 		<tr>

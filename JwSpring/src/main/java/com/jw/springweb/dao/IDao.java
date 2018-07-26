@@ -70,7 +70,7 @@ public class IDao {
 		
 		try {
 			conn= dataSource.getConnection();
-			pstmt = conn.prepareStatement("select * from mvc_board");
+			pstmt = conn.prepareStatement("select * from mvc_board order by bgroup desc, bStep asc ");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int bId = rs.getInt("bId");
@@ -100,13 +100,53 @@ public class IDao {
 		return dtos;
 	}
 	
+	public void reply(int oribId, String bName, String bTitle, String bContent) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			conn= dataSource.getConnection();
+			pstmt = conn.prepareStatement("select * from mvc_board where bId=?");
+			pstmt.setInt(1, oribId);
+			rs=pstmt.executeQuery();
+			
+			rs.next();
+			int oriGroup = rs.getInt("bGroup");
+			int oriStep= rs.getInt("bStep");
+			int oriIndent = rs.getInt("bIndent");
+			pstmt.close();
+			rs.close();
+			
+			pstmt = conn.prepareStatement("insert into MVC_BOARD values(MVC_BOARD_SEQ.NEXTVAL,?,?,?,Sysdate,0,?,?,?)");
+			pstmt.setString(1, bName);
+			pstmt.setString(2, bTitle);
+			pstmt.setString(3, bContent);
+			pstmt.setInt(4, oriGroup);
+			pstmt.setInt(5, oriStep+1);
+			pstmt.setInt(6, oriIndent+1);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void write(String bName, String bTitle, String bContent) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
 		int write=0;
 		try {
 			conn = dataSource.getConnection();
-			pstmt= conn.prepareStatement("insert into MVC_BOARD values(MVC_BOARD_SEQ.NEXTVAL,?,?,?,Sysdate,0,0,0,0)");
+			pstmt= conn.prepareStatement("insert into MVC_BOARD values(MVC_BOARD_SEQ.NEXTVAL,?,?,?,Sysdate,0,mvc_board_seq.currval,0,0)");
 			pstmt.setString(1, bName);
 			pstmt.setString(2, bTitle);
 			pstmt.setString(3, bContent);
@@ -161,6 +201,7 @@ public class IDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		boardDTO dto= null;
+		int bHit=0;
 		try {
 			conn = dataSource.getConnection();
 			pstmt =conn.prepareStatement("select * from mvc_board where bId=?");
@@ -173,13 +214,19 @@ public class IDao {
 				String bTitle= rs.getString("bTitle");
 				String bContent= rs.getString("bContent");
 				Timestamp bDate = rs.getTimestamp("bDate");
-				int bHit = rs.getInt("bHit");
+				bHit = rs.getInt("bHit");
 				int bGroup = rs.getInt("bGroup");
 				int bStep = rs.getInt("bStep");
 				int bIndent = rs.getInt("bIndent");
 				dto = new boardDTO(bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
 				System.out.println(dto);
+				
 			}
+			pstmt.close();
+			pstmt = conn.prepareStatement("update mvc_board set bHit=? where bId=?");
+			pstmt.setInt(1, bHit+1);
+			pstmt.setInt(2, inpbId);
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 		}finally {

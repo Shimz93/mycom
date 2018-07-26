@@ -20,6 +20,7 @@ public class boardDTO {
 		this.bContent=bContent;
 		this.bDate=bDate;
 		this.bHit=bHit;
+		this.bGroup=bGroup;
 		this.bStep=bStep;
 		this.bIndent=bIndent;
 	}
@@ -28,6 +29,9 @@ public class boardDTO {
 		this.bName=bName;
 		this.bTitle=bTitle;
 		this.bContent=bContent;
+	}
+	public boardDTO(int bId) {
+		this.bId=bId;
 	}
 	
 	public int getbId() {

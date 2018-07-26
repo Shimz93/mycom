@@ -16,9 +16,10 @@ public class LoginCommand implements Command {
 	public void execute(Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		String email=(String) request.getAttribute("inputEmail");
-		String password =(String)request.getAttribute("inputPassword");
+		String email=(String) request.getParameter("inputEmail");
+		String password =(String)request.getParameter("inputPassword");
 		IDao dao = new IDao();
+		System.out.println(email+password);
 		loginDTO dto=dao.login(email,password);
 		if (dto==null) {
 			System.out.println("로그인 정보 없음");
