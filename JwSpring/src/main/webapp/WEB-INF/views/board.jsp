@@ -83,7 +83,7 @@
 		<td>글번호</td>
 		<td>제목</td>
 		<td>조회수</td>
-		<td>게시일ㅇ</td>
+		<td>게시일</td>
 		</tr>
 		
 		<c:forEach var="dto" items= "${ list}" >

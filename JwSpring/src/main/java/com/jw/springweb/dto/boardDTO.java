@@ -13,6 +13,10 @@ public class boardDTO {
 	int bStep;
 	int bIndent;
 	
+	public boardDTO() {
+		
+	}
+	
 	public boardDTO(int bId,String bName,String bTitle,String bContent,Timestamp bDate,int bHit,int bGroup,int bStep,int bIndent) {
 		this.bId=bId;
 		this.bName=bName;

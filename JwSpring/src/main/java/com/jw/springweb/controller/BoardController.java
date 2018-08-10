@@ -3,6 +3,8 @@ package com.jw.springweb.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +18,20 @@ import com.jw.springweb.command.ReplyCommand;
 import com.jw.springweb.command.WriteCommand;
 import com.jw.springweb.command.modifyCommand;
 import com.jw.springweb.dto.boardDTO;
+import com.jw.springweb.util.Constant;
 
 @Controller
 public class BoardController {
 
+	public JdbcTemplate jdbctemplate;
+	
+	@Autowired
+	public void setJdbcTemplate(JdbcTemplate jdbctemplate) {
+		this.jdbctemplate=jdbctemplate;
+		Constant.template=this.jdbctemplate;
+	}
+	
+	
 	@RequestMapping("/list")
 	public String list(Model model) {
 	Command command = new ListCommand();
