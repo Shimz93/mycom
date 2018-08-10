@@ -32,6 +32,15 @@
 		<beans:property name="dataSource" ref="dataSource"/>
 	</beans:bean>
 	
+	<beans:bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <beans:property name="dataSource" ref="dataSource" />
+    <beans:property name="mapperLocations" value="classpath:/com.jw.springweb.dao.mapper/*.xml" />
+	</beans:bean>
+
+	<beans:bean id="sqlSession" name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+    <beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</beans:bean>
+	
 	<context:component-scan base-package="com.jw.springweb" />
 	
 	
