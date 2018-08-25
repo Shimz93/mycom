@@ -78,7 +78,10 @@
       <!-- Main component for a primary marketing message or call to action -->
   
 	<form action="<%=ctx%>/replyOk" method="post">
-	<input type="hidden" name="oribId" value= "${oriDto }" >
+	<input type="hidden" name="oribId" value= "${dto.bId }" >
+	<input type="hidden" name="oribGroup" value= "${dto.bGroup }" >
+	<input type="hidden" name="oribStep" value= "${dto.bStep }" >
+	<input type="hidden" name="oribIndent" value= "${dto.bIndent }" >
 	<table border=1, cellspace=1, cellpadding=1 align=center>
 		<tr>
 		<td>작성자</td>

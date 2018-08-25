@@ -3,8 +3,6 @@ package com.jw.springweb.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +13,13 @@ import com.jw.springweb.command.ContentViewCommand;
 import com.jw.springweb.command.DeleteCommand;
 import com.jw.springweb.command.ListCommand;
 import com.jw.springweb.command.ReplyCommand;
+import com.jw.springweb.command.ReplyViewCommand;
 import com.jw.springweb.command.WriteCommand;
 import com.jw.springweb.command.modifyCommand;
 import com.jw.springweb.dto.boardDTO;
-import com.jw.springweb.util.Constant;
 
 @Controller
 public class BoardController {
-
-	public JdbcTemplate jdbctemplate;
-	
-	@Autowired
-	public void setJdbcTemplate(JdbcTemplate jdbctemplate) {
-		this.jdbctemplate=jdbctemplate;
-		Constant.template=this.jdbctemplate;
-	}
-	
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
@@ -45,11 +34,10 @@ public class BoardController {
 	}
 	@RequestMapping("/reply")
 	public String reply(Model model, HttpServletRequest request) {
-		int originbId = Integer.parseInt(request.getParameter("bId"));
-//		boardDTO dto = new boardDTO(originbId);
+		Command command = new ReplyViewCommand();
+		model.addAttribute("request", request);
+		command.execute(model);
 		
-//		model.addAttribute("oriDto", dto);
-		model.addAttribute("oriDto", originbId);
 		return "reply";
 	}
 	

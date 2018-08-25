@@ -9,8 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
 import com.jw.springweb.dao.IDao;
+import com.jw.springweb.dto.boardDTO;
 
-public class WriteCommand implements Command {
+public class ReplyViewCommand implements Command{
 
 
 	@Autowired
@@ -20,14 +21,11 @@ public class WriteCommand implements Command {
 	@Override
 	public void execute(Model model) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		int bId = Integer.parseInt(request.getParameter("bId"));
 		IDao dao = sqlSession.getMapper(IDao.class);
-		String bName = request.getParameter("bName");
-		String bTitle = request.getParameter("bTitle");
-		String bContent = request.getParameter("bContent");
-		dao.write(bName, bTitle, bContent);
-		
-		
+		boardDTO dto =dao.replyInfo(bId);
+		model.addAttribute("dto",dto);
 	}
 
 }

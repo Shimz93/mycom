@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jw.springweb.dao.IDao">
+
+<select id="login" resultType="com.jw.springweb.dto.loginDTO">
+	SELECT * FROM MEMBER WHERE EMAIL=#{param1} AND PASSWORD=#{param2}
+</select>
+
+<select id="list" resultType="com.jw.springweb.dto.boardDTO">
+	SELECT * FROM MVC_BOARD ORDER BY BGROUP DESC, BSTEP ASC
+</select>
+
+<select id="replyInfo" resultType="com.jw.springweb.dto.boardDTO">
+	SELECT * FROM MVC_BOARD WHERE BID=#{PARAM1}
+</select>
+
+<insert id="reply" >
+	INSERT INTO MVC_BOARD VALUES(MVC_BOARD_SEQ.NEXTVAL,#{PARAM1},#{PARAM2},#{PARAM3},SYSDATE,0,#{PARAM4},#{PARAM5}+1,#{PARAM6}+1)
+</insert>
+
+<insert id="write">
+	INSERT INTO MVC_BOARD VALUES(MVC_BOARD_SEQ.NEXTVAL,#{param1},#{param2},#{param3},SYSDATE,0,MVC_BOARD_SEQ.CURRVAL,0,0)
+</insert>
+
+<update id="modify">
+	UPDATE MVC_BOARD SET BNAME=#{PARAM2}, BTITLE=#{PARAM3}, BCONTENT=#{PARAM4} WHERE BID=#{PARAM1}
+</update>
+
+<select id="contentView" resultType="com.jw.springweb.dto.boardDTO">
+	SELECT * FROM MVC_BOARD WHERE BID=#{PARAM1}
+</select>
+
+<update id="upHit">
+	UPDATE MVC_BOARD SET BHIT=BHIT+1 WHERE BID=#{param1}
+</update>
+
+<delete id="delete">
+	DELETE FROM MVC_BOARD WHERE BID=#{param1}
+</delete>
 
 
-</beans>
+</mapper>
