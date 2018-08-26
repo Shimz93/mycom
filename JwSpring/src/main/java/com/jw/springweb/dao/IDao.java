@@ -12,8 +12,8 @@ public interface IDao {
 	public ArrayList<boardDTO> list();
 	public boardDTO replyInfo(int bId);
 	public void reply(String bName,String bTitle, String bContent, int bGroup, int bStep, int bIndent);
-	public void write( String bName, String bTitle,  String bContent);	
-	public void modify( int bId, String bName, String bTitle,  String bContent);;
+	public void write( String bName, String bTitle, String bContent);	
+	public void modify(String bName, String bTitle, String bContent, int bId);;
 	public boardDTO contentView(int inpbId);
 	void upHit(int id);
 	public void delete(int id);

@@ -14,11 +14,11 @@
 </select>
 
 <select id="replyInfo" resultType="com.jw.springweb.dto.boardDTO">
-	SELECT * FROM MVC_BOARD WHERE BID=#{PARAM1}
+	SELECT * FROM MVC_BOARD WHERE BID=#{param1}
 </select>
 
 <insert id="reply" >
-	INSERT INTO MVC_BOARD VALUES(MVC_BOARD_SEQ.NEXTVAL,#{PARAM1},#{PARAM2},#{PARAM3},SYSDATE,0,#{PARAM4},#{PARAM5}+1,#{PARAM6}+1)
+	INSERT INTO MVC_BOARD VALUES(MVC_BOARD_SEQ.NEXTVAL,#{param1},#{param2},#{param3},SYSDATE,0,#{param4},#{param5}+1,#{param6}+1)
 </insert>
 
 <insert id="write">
@@ -26,11 +26,11 @@
 </insert>
 
 <update id="modify">
-	UPDATE MVC_BOARD SET BNAME=#{PARAM2}, BTITLE=#{PARAM3}, BCONTENT=#{PARAM4} WHERE BID=#{PARAM1}
+	UPDATE MVC_BOARD SET BNAME=#{param1}, BTITLE=#{param2}, BCONTENT=#{param3} WHERE BID=#{param4}
 </update>
 
 <select id="contentView" resultType="com.jw.springweb.dto.boardDTO">
-	SELECT * FROM MVC_BOARD WHERE BID=#{PARAM1}
+	SELECT * FROM MVC_BOARD WHERE BID=#{param1}
 </select>
 
 <update id="upHit">
